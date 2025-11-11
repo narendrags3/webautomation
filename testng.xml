@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="utilities.ExtentReportManager"/>
+    </listeners>
+    <parameter name="os" value="windows"></parameter>
+    <parameter name="browser" value="chrome"></parameter>
+    <test name="login-page">
+        <classes>
+            <class name="tests.LoginPageTest">
+                <methods>
+                    <include name="login"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="homepage">
+        <classes>
+            <class name="tests.HomePageTest">
+                <methods>
+                    <include name="login"/>
+                    <include name="home"/>
+                    <include name="maintenancePage"/>
+                    <include name="logout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
