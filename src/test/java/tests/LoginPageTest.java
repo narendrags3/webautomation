@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utilities.DataProviders;
 
-//@Listeners(utilities.ExtentReportManager.class)
+//@Listeners(utilities.CustomListeners.class)
 public class LoginPageTest extends BaseTest {
 
     @Test(dataProvider = "loginData", dataProviderClass = DataProviders.class)

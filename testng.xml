@@ -21,6 +21,7 @@
                 <methods>
                     <include name="login"/>
                     <include name="home"/>
+                    <include name="pimPage"/>
                     <include name="maintenancePage"/>
                     <include name="logout"/>
                 </methods>

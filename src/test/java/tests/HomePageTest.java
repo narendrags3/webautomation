@@ -7,7 +7,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import utilities.DataProviders;
 
-//@Listeners(utilities.ExtentReportManager.class)
+//@Listeners(utilities.CustomListeners.class)
 public class HomePageTest extends BaseTest {
 
     @Test(priority = 1, dataProvider = "loginData", dataProviderClass = DataProviders.class)
@@ -25,7 +25,19 @@ public class HomePageTest extends BaseTest {
         homePage.theLink();
     }
 
-    @Test(dependsOnMethods = {"home"})
+    @Test(priority = 3, dataProvider = "employeeData", dataProviderClass = DataProviders.class)
+    public void pimPage(String FirstName,String MiddleName,String LastName,String EmployeeID){
+        HomePage homePage=new HomePage(driver);
+        homePage.clickPim();
+        homePage.clickAddEmployee();
+        homePage.enterFirstName(FirstName);
+        homePage.enterMiddleName(MiddleName);
+        homePage.enterLastName(LastName);
+        homePage.enterEmpId(EmployeeID);
+        homePage.clickSave();
+    }
+
+    @Test(priority = 4, dependsOnMethods = {"home"})
     public void maintenancePage() {
         HomePage homePage = new HomePage(driver);
         homePage.clickMaintenance();
