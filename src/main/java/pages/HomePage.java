@@ -1,83 +1,56 @@
 package pages;
 
 import base.BasePage;
+import base.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
 
 public class HomePage extends BasePage {
 
-    public HomePage(WebDriver driver) {
+    public HomePage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     //Dashboard page
-    @FindBy(xpath = "//span[text()='Dashboard']")
-    private WebElement board;
 
-    @FindBy(tagName = "img")
-    private List<WebElement> images;
+    private By images=By.tagName("img");
 
-    //@FindBy(linkText = "OrangeHRM, Inc")
-    //private WebElement link;
-
-    @FindBy(partialLinkText = "OrangeHRM,")
-    private WebElement link;
-
+    private By link=By.partialLinkText("OrangeHRM,");
 
     //PIM page
-    @FindBy(xpath = "//span[text()='PIM']")
-    private WebElement pim;
+    private By pim= By.xpath("//span[text()='PIM']");
 
-    @FindBy(xpath = "//a[text()='Add Employee']")
-    private WebElement emp;
+    private By emp= By.xpath("//a[text()='Add Employee']");
 
-    @FindBy(xpath = "//input[@placeholder='First Name']")
-    private WebElement empFirstName;
+    private By empFirstName= By.xpath("//input[@placeholder='First Name']");
 
-    @FindBy(xpath = "//input[@placeholder='Middle Name']")
-    private WebElement empMiddleName;
+    private By empMiddleName= By.xpath("//input[@placeholder='Middle Name']");
 
-    @FindBy(xpath = "//input[@placeholder='Last Name']")
-    private WebElement empLastName;
+    private By empLastName= By.xpath("//input[@placeholder='Last Name']");
 
-    @FindBy(xpath = "(//input[contains(@class, 'oxd-input')])[5]")
-    private WebElement empId;
+    private By empId= By.xpath("//div[label[text()='Employee Id']]/following::input[contains(@class, 'oxd-input')]");
 
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement save;
+    private By save= By.xpath("//button[@type='submit']");
 
+    private By empName= By.xpath("//h6[text()='Narendra S']");
 
     //Maintenance page
-    @FindBy(xpath = "//span[text()='Maintenance']")
-    private WebElement main;
+    private By main= By.xpath("//span[text()='Maintenance']");
 
-    @FindBy(xpath = "//input[@type='password']")
-    private WebElement pwd;
+    private By pwd= By.xpath("//input[@type='password']");
 
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement button;
+    private By button= By.xpath("//button[@type='submit']");
 
-    @FindBy(xpath = "//h6[text()='Maintenance']")
-    private WebElement checkMain;
-
+    private By checkMain= By.xpath("//h6[text()='Maintenance']");
 
     //Logout
-    @FindBy(css = "p.oxd-userdropdown-name")
-    private WebElement validUser;
+    private By validUser= By.cssSelector("p.oxd-userdropdown-name");
 
-    @FindBy(xpath = "//a[text()='Logout']")
-    private WebElement logout;
+    private By logout= By.xpath("//a[text()='Logout']");
+
+    private By verifyLogout= By.xpath("//h5[text()='Login']");
 
 
-    public boolean dashboard() {
-        log.info("dashboard page is displayed");
-        return board.isDisplayed();
-    }
 
     public String theTitle() {
         log.info("titles are matched");
@@ -85,76 +58,87 @@ public class HomePage extends BasePage {
     }
 
     public void imagesCount() {
-        log.info("total number of images :{}",images.size());
+        int count = driver.findElements(images).size();
+        log.info("total number of images :{}",count);
     }
 
     public void theLink() {
-        log.info("the text is :{}",link.getText());
+        String text=driver.findElement(link).getText();
+        log.info("the text is :{}",text);
     }
 
     public void clickPim() {
-        pim.click();
         log.info("clicked the PIM page");
+        driver.findElement(pim).click();
     }
 
     public void clickAddEmployee() {
-        emp.click();
-        log.info("Add employee details are visible");
+        log.info("clicked the Add employee");
+        driver.findElement(emp).click();
     }
 
     public void enterFirstName(String FirstName) {
-        empFirstName.sendKeys(FirstName);
         log.info("enter the first name :{}", FirstName);
+        driver.findElement(empFirstName).sendKeys(FirstName);
     }
 
     public void enterMiddleName(String MiddleName) {
-        empMiddleName.sendKeys(MiddleName);
         log.info("enter the middle name :{}", MiddleName);
+        driver.findElement(empMiddleName).sendKeys(MiddleName);
     }
 
     public void enterLastName(String LastName) {
-        empLastName.sendKeys(LastName);
         log.info("enter the last name :{}", LastName);
+        driver.findElement(empLastName).sendKeys(LastName);
     }
 
     public void enterEmpId(String EmployeeID) {
-        empId.sendKeys(EmployeeID);
         log.info("enter the employee ID :{}", EmployeeID);
+        driver.findElement(empId).sendKeys(EmployeeID);
     }
 
     public void clickSave() {
-        save.click();
         log.info("clicked the save button");
+        driver.findElement(save).click();
     }
 
+    public String verifyEmp(){
+        log.info("Employee added successfully");
+        return driver.findElement(empName).getText();
+    }
 
     public void clickMaintenance() {
-        main.click();
         log.info("clicked the maintenance");
+        driver.findElement(main).click();
     }
 
     public void enterPassword(String password) {
-        pwd.sendKeys(password);
         log.info("enter the password :{}",password);
+        driver.findElement(pwd).sendKeys(password);
     }
 
     public void clickSubmit() {
-        button.click();
         log.info("clicked the submit");
+        driver.findElement(button).click();
     }
 
     public String mainVisible() {
         log.info("maintenance page is displayed");
-        return checkMain.getText();
+        return driver.findElement(checkMain).getText();
     }
 
     public void clickValidUser() {
-        validUser.click();
         log.info("clicked the valid user");
+        driver.findElement(validUser).click();
     }
 
     public void clickLogout() {
-        logout.click();
         log.info("clicked the logout");
+        driver.findElement(logout).click();
+    }
+
+    public boolean logout(){
+        log.info("Logout is successful");
+        return driver.findElement(verifyLogout).isDisplayed();
     }
 }

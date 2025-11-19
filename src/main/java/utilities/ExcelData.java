@@ -1,7 +1,5 @@
 package utilities;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -12,8 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class ExcelData {
-
-    private static final Logger log = LogManager.getLogger(ExcelData.class);
 
     public Object[][] readExcelData() throws IOException {
         FileInputStream file=new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\resources\\EmployeeDetails.xlsx");
@@ -33,7 +29,6 @@ public class ExcelData {
                 XSSFCell cell=currentRow.getCell(c);
                 String cellValue= formatter.formatCellValue(cell);
                 data[r-1][c]=cellValue;
-                log.info(cellValue);
             }
         }
         workbook.close();

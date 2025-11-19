@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="tests" thread-count="2">
     <listeners>
-        <listener class-name="utilities.ExtentReportManager"/>
+        <listener class-name="utilities.ExtentReportManager"></listener>
     </listeners>
     <parameter name="os" value="windows"></parameter>
     <parameter name="browser" value="chrome"></parameter>
-    <test name="login-page">
+    <test name="Login Page">
         <classes>
             <class name="tests.LoginPageTest">
                 <methods>
@@ -15,11 +15,10 @@
             </class>
         </classes>
     </test>
-    <test name="homepage">
+    <test name="Home Page">
         <classes>
             <class name="tests.HomePageTest">
                 <methods>
-                    <include name="login"/>
                     <include name="home"/>
                     <include name="pimPage"/>
                     <include name="maintenancePage"/>

@@ -2,10 +2,10 @@ package base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
@@ -18,7 +18,7 @@ public class BaseTest {
 
     @BeforeClass
     public void setup() throws IOException {
-        FileReader file = new FileReader("C:\\Users\\Narendra.G\\IdeaProjects\\webautomation\\src\\main\\java\\utilities\\Conf.Properties");
+        FileReader file = new FileReader(System.getProperty("user.dir")+"\\src\\main\\resources\\Conf.Properties");
         p = new Properties();
         p.load(file);
 
